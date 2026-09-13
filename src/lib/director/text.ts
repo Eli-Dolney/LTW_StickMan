@@ -77,11 +77,10 @@ export function hasCjk(text: string): boolean {
 }
 
 export function ensurePeriod(text: string): string {
-  const trimmed = text.trim().replace(/\.+ /g, ".");
-  const compact = text.trim().replace(/\.+/g, ".");
-  if (!compact) return "";
-  if (/[.!?]$/.test(compact)) return compact;
-  return `${compact}.`;
+  const trimmed = text.trim().replace(/\.+/g, ".");
+  if (!trimmed) return "";
+  if (/[.!?]$/.test(trimmed)) return trimmed;
+  return `${trimmed}.`;
 }
 
 export function stripTrailingPunct(text: string): string {
@@ -107,7 +106,7 @@ export function extractNumbers(text: string): string[] {
 }
 
 export function extractKeywords(text: string, limit = 8): string[] {
-  const counts = new Map();
+  const counts = new Map<string, number>();
   for (const token of tokenize(text)) {
     const word = token.toLowerCase();
     if (word.length < 4 || STOP_WORDS.has(word) || /^\d+$/.test(word)) continue;
@@ -137,10 +136,10 @@ export function clipWords(text: string, max: number): string {
   return ensurePeriod(stripTrailingPunct(clipped.join(" ")));
 }
 
-export function joinBeats(beats) {
+export function joinBeats(beats: string[]): string {
   return beats.map((beat) => ensurePeriod(beat)).join(" ");
 }
 
-export function estimatedSeconds(words) {
+export function estimatedSeconds(words: number): number {
   return Math.round((words / 2.4) * 10) / 10;
 }
