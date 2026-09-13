@@ -17,6 +17,7 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { StickmanStage } from "@/components/stickman-stage";
+import { TelegramHandoff } from "@/components/telegram-handoff";
 import {
   ASPECT_RATIOS,
   SAMPLE_IDEAS,
@@ -543,6 +544,8 @@ function PackagePanel({
           <p className="text-zinc-500">{pack.audioNote}</p>
         </CardContent>
       </Card>
+
+      <TelegramHandoff proposal={proposal} pack={pack} />
 
       {pack.prompts.map((clip, index) => (
         <Card key={clip.title} className="border-white/8 bg-zinc-950/70 text-zinc-100 ring-white/10">
