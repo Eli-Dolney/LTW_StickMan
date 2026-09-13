@@ -1,0 +1,3 @@
+# LTW StickMan
+
+Initialize project.
